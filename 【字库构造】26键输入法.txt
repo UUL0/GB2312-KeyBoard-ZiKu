@@ -1,0 +1,59 @@
+a ai an ang ao 
+ba bai ban bang bao bei ben beng bi bian biao bie bin bing bo bu 
+ca cai can cang cao ce cen ceng cha chai chan chang chao che chen cheng chi chong chou chu chuai chuan chuang chui chun chuo ci cong cou cu cuan cui cun cuo 
+da dai dan dang dao de dei deng di dia dian diao die ding diu dong dou du duan dui dun duo 
+e ei en er 
+fa fan fang fei fen feng fo fou fu 
+ga gai gan gang gao ge gei gen geng gong gou gu gua guai guan guang gui gun guo 
+ha hai han hang hao he hei hen heng hng hong hou hu hua huai huan huang hui hun huo 
+i
+ji jia jian jiang jiao jie jin jing jiong jiu ju juan jue jun 
+ka kai kan kang kao ke ken keng kong kou ku kua kuai kuan kuang kui kun kuo 
+la lai lan lang lao le lei leng li lia lian liang liao lie lin ling liu lo long lou lu lv luan lue lun luo 
+m ma mai man mang mao me mei men meng mi mian miao mie min ming miu mo mou mu 
+n na nai nan nang nao ne nei nen neng ng ni nian niang niao nie nin ning niu nong nou nu nv nuan nue nuo 
+o ou 
+pa pai pan pang pao pei pen peng pi pian piao pie pin ping po pou pu 
+qi qia qian qiang qiao qie qin qing qiong qiu qu quan que qun 
+ran rang rao re ren reng ri rong rou ru ruan rui run ruo 
+sa sai san sang sao se sen seng sha shai shan shang shao she shei shen sheng shi shou shu shua shuai shuan shuang shui shun shuo si song sou su suan sui sun suo 
+ta tai tan tang tao te tei teng ti tian tiao tie ting tong tou tu tuan tui tun tuo 
+u
+v
+wa wai wan wang wei wen weng wo wu 
+xi xia xian xiang xiao xie xin xing xiong xiu xu xuan xue xun 
+ya yan yang yao ye yi yin ying yo yong you yu yuan yue yun 
+za zai zan zang zao ze zei zen zeng zha zhai zhan zhang zhao zhe zhei zhen zheng zhi zhong zhou zhu zhua zhuai zhuan zhuang zhui zhun zhuo zi zong zou zu zuan zui zun zuo
+
+
+---------------------------构造
+由字符集+汉字
+列表编号为1~255，255~N（目前是7581）
+
+
+--------------------拼音
+编码：以0~29bit对应最多6个字母，先左移5bit后或运算，无需解码，拼音按顺序输入时也是这样，通过输入的值比对索引到拼音位置
+
+解码：从高到低，每5bit对应一个字母，按照左至右读顺序
+
+
+---------------------------索引
+字库最大索引范围
+字库表每100进行分组取模运算
+字库按照a~z段进行编号（与上面的一样）
+
+拼音号索引表
+（0~N（<500））
+a~z，a~z的拼音
+
+范围开始表A（索引字库的位置起始，包含）
+范围结束表B（从位置索引字库的总长度）
+
+对于字模，一个字要用32字节表示，一个整数是4字节，一个字需要用到8个整数
+节点图变量和实体变量都不能存这么多列表变量
+需要用节点图拼接写入
+需要拼接70*8=560个整数列表，一个整数列表只能存100个整数
+一个整数列表拼接用到负载大概是50~100左右
+显然这样做可能会负载爆炸
+直接用两个实体存储是最好的，但一般场景还好，实体数量足够使用了，但画猜里可能不太行
+
